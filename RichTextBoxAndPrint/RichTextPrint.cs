@@ -80,16 +80,10 @@ namespace RichTextBoxAndPrint
             fmtRange.hdcTarget = hdc;
             fmtRange.rc = rectToPrint;
             fmtRange.rcPage = rectPage;
-
-            IntPtr wparam = IntPtr.Zero;
-            wparam = new IntPtr(1);
-
-            IntPtr lparam = IntPtr.Zero;
-            lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(fmtRange));
+            IntPtr wparam = new IntPtr(1);
+            IntPtr lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(fmtRange));
             Marshal.StructureToPtr(fmtRange, lparam, false);
-
-            IntPtr res = IntPtr.Zero;
-            res = SendMessage(Handle, EM_FORMATRANGE, wparam, lparam);
+            IntPtr res = SendMessage(Handle, EM_FORMATRANGE, wparam, lparam);
 
             Marshal.FreeCoTaskMem(lparam);
 
